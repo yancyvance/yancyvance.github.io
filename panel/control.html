@@ -1,0 +1,385 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <!-- Required meta tags -->
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+
+    <!-- Bootstrap CSS -->
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
+
+	<script>
+		var globalAgent = "[ This is Alpha ]\n";
+	</script>
+	
+	<style>
+		.form-control {
+			font-size: .95em;
+		}
+	</style>
+	
+    <title>Alpha's Control Panel</title>
+  </head>
+  <body>
+    <div class="container-fluid">
+		<div class="row">
+			<div class="col-12">
+				<div class="alert alert-primary" role="alert" id="condition">
+				  <input type="file" id="source" style="font-size: .7em"> Load the source file!
+				</div>
+			</div>
+		</div>
+		
+		<div class="row">
+			<div class="col-12">
+				<textarea id="txtData" class="form-control" rows="6"></textarea>
+			</div>
+		</div>
+		<br />
+		<div class="row">
+			<div class="col-3">
+				<textarea id="txtPriorities" class="form-control" rows="5"></textarea>
+			
+				<button onclick="priorities()" class="btn btn-primary btn-lg btn-block">Copy Priorities</button>
+			
+				<textarea id="txtPriorities2" class="form-control" rows="3"></textarea>
+				<button onclick="priorities2()" class="btn btn-primary btn-lg btn-block">Copy Priorities Extra</button>
+			</div>
+			
+			<div class="col-3">
+				<textarea id="txtDestinations" class="form-control" rows="5"></textarea>
+				<button onclick="destinations()" class="btn btn-primary btn-lg btn-block">Copy Destinations</button>
+				
+				<textarea id="txtDestinations2" class="form-control" rows="3"></textarea>
+				<button onclick="destinations2()" class="btn btn-primary btn-lg btn-block">Copy Destinations Extra</button>
+			</div>
+			
+			<div class="col-3">
+				<textarea id="txtTrucks" class="form-control" rows="5"></textarea>
+				<button onclick="trucks()" class="btn btn-primary btn-lg btn-block">Copy Trucks</button>
+				
+				<textarea id="txtTrucks2" class="form-control" rows="3"></textarea>
+				<button onclick="trucks2()" class="btn btn-primary btn-lg btn-block">Copy Trucks Extra</button>
+			</div>
+			
+			<div class="col-3">
+				<textarea id="txtRoutes" class="form-control" rows="5"></textarea>
+				<button onclick="routes()" class="btn btn-primary btn-lg btn-block">Copy Routes</button>
+				
+				<textarea id="txtRoutes2" class="form-control" rows="3"></textarea>
+				<button onclick="routes2()" class="btn btn-primary btn-lg btn-block">Copy Routes Extra</button>
+			</div>
+		</div>
+		
+		<br />
+		
+		<div class="row">
+			<div class="col-8">
+				<button onclick="logged()" class="btn btn-primary btn-lg">Logged In</button>
+				<button onclick="got()" class="btn btn-primary btn-lg">Got It</button>
+				<button onclick="none()" class="btn btn-primary btn-lg">None</button>
+				<button onclick="no()" class="btn btn-primary btn-lg">No</button>
+				<button onclick="yes()" class="btn btn-primary btn-lg">Yes</button>
+				<button onclick="agree()" class="btn btn-primary btn-lg">Agree</button>
+				<button onclick="wait()" class="btn btn-primary btn-lg">Please Wait</button>
+				<button onclick="done()" class="btn btn-primary btn-lg">Done</button>
+				<button onclick="mistake()" class="btn btn-primary btn-lg">Mistake</button>
+				
+				<br /><br />
+				
+				<textarea id="custom" class="form-control" rows="2"></textarea>
+				<button onclick="custom()" class="btn btn-primary btn-lg btn-block">Copy Custom</button>
+				
+			</div>
+			
+			<div class="col-4">
+				<div class="form-row">
+					<div class="col-auto">
+						<input type="text" class="form-control" id="txtFood" value="">
+					</div>
+					
+					<div class="col-auto">
+						<div class="form-check">
+							<input class="form-check-input" type="checkbox" checked="true" id="chkFood" name="supplies">
+							<label class="form-check-label" for="chkFood">Food</label>
+						</div>
+					</div>
+				</div>
+				
+				<div class="form-row">
+					<div class="col-auto">
+						<input type="text" class="form-control" id="txtWater" value="">
+					</div>
+					
+					<div class="col-auto">
+						<div class="form-check">
+							<input class="form-check-input" type="checkbox" checked="true" id="chkWater" name="supplies">
+							<label class="form-check-label" for="chkWater">Water</label>
+						</div>
+					</div>
+				</div>
+				
+				
+				<div class="form-row">
+					<div class="col-auto">
+						<input type="text" class="form-control" id="txtMedical" value="">
+					</div>
+					
+					<div class="col-auto">
+						<div class="form-check">
+							<input class="form-check-input" type="checkbox" checked="true" id="chkMedical" name="supplies">
+							<label class="form-check-label" for="chkMedical">Medical Supplies</label>
+						</div>
+					</div>
+				</div>
+				
+				
+				<div class="form-row">
+					<div class="col-auto">
+						<input type="text" class="form-control" id="txtConstruction" value="">
+					</div>
+					
+					<div class="col-auto">
+						<div class="form-check">
+							<input class="form-check-input" type="checkbox" checked="true" id="chkConstruction" name="supplies">
+							<label class="form-check-label" for="chkConstruction">Construction Supplies</label>
+						</div>
+					</div>
+				</div>
+				
+				
+				<button onclick="inventory()" class="btn btn-primary btn-lg">Copy Supplies</button>
+				<button onclick="select()" class="btn btn-warning btn-lg">Select All</button>
+				<button onclick="deselect()" class="btn btn-warning btn-lg">Deselect All</button>
+			</div>
+		</div>
+    
+    </div>
+
+    <!-- Optional JavaScript -->
+    <!-- jQuery first, then Popper.js, then Bootstrap JS -->
+    <script src="https://code.jquery.com/jquery-3.2.1.slim.min.js" integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN" crossorigin="anonymous"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js" integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q" crossorigin="anonymous"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js" integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl" crossorigin="anonymous"></script>
+	
+	<script>
+		var copyText = document.getElementById("txtData");
+		
+		function copy() {
+			// select the text field
+			copyText.select();
+			copyText.setSelectionRange(0, 99999); // for mobile
+			
+			document.execCommand("copy");
+		}
+		
+		function combine(msg) {
+			$("#txtData").val( globalAgent + msg );
+			
+			copy();
+		}
+		
+		
+		function priorities() {
+			combine( $("#txtPriorities").val() );
+		}
+		
+		function destinations() {
+			combine( $("#txtDestinations").val() );
+		}
+		
+		function trucks() {
+			combine( $("#txtTrucks").val() );
+		}
+		
+		function routes() {
+			combine( $("#txtRoutes").val() );
+		}
+		
+		
+		
+		function priorities2() {
+			combine( $("#txtPriorities2").val() );
+		}
+		
+		function destinations2() {
+			combine( $("#txtDestinations2").val() );
+		}
+		
+		function trucks2() {
+			combine( $("#txtTrucks2").val() );
+		}
+		
+		function routes2() {
+			combine( $("#txtRoutes2").val() );
+		}
+		
+		
+		
+		
+		function logged() {
+			combine( "I am logged in." );
+		}
+		
+		function got() {
+			combine( "I got it. ");
+		}
+		
+		function none() {
+			combine( "None." );
+		}
+		
+		function no() {
+			combine( "No." );
+		}
+		
+		function yes() {
+			combine( "Yes." );
+		}
+		
+		function agree() {
+			combine( "I agree." );
+		}
+		
+		function wait() {
+			combine( "Please wait." );
+		}
+		
+		function done() {
+			combine( "Done." );
+		}
+		
+		function mistake() {
+			combine( "Sorry. I made a mistake." );
+		}
+		
+		function custom() {
+			combine( $("#custom").val() );
+		}
+		
+		
+		function inventory() {
+			var counter = [
+				$("#txtFood").val(),
+				$("#txtWater").val(),
+				$("#txtMedical").val(),
+				$("#txtConstruction").val()
+			];
+			
+			var label = [
+				"Food",
+				"Water",
+				"Medical Supplies",
+				"Construction Supplies"
+			];
+			
+			var ch = document.getElementsByName("supplies");
+			var n = 0;
+			
+			// count
+			for(var i = 0; i < ch.length; i++) {
+				if(ch[i].checked)
+					n++;
+			}
+			
+			var msg = "I have";
+			var prep = 0;
+			
+			for(var i = 0; i < ch.length; i++) {
+				if(ch[i].checked) {
+					if(prep != n-1)
+						if(prep == 0)
+							msg = msg + " ";
+						else
+							msg = msg + ", ";
+					else
+						if(prep == 0)
+							msg = msg + " ";
+						else
+							msg = msg + ", and ";
+							
+					msg = msg + counter[i] + " " + label[i];
+					
+					// increment
+					prep++;
+				}
+			}
+			
+			
+			combine( msg + "." );
+			
+		}
+		
+		
+		function select() {
+			var ch = document.getElementsByName("supplies");
+			
+			// count
+			for(var i = 0; i < ch.length; i++) {
+				ch[i].checked = true;
+			}
+		}
+		
+		
+		function deselect() {
+			var ch = document.getElementsByName("supplies");
+			
+			// count
+			for(var i = 0; i < ch.length; i++) {
+				ch[i].checked = false;
+			}
+		}
+		
+		
+		var txtFile = document.getElementById('source');
+		
+		txtFile.addEventListener('change', () => {
+			var files = txtFile.files;
+			
+			if(files.length == 0) return;
+			
+			var file = files[0];
+			
+			var reader = new FileReader();
+			
+			reader.onload = (e) => {
+				var file = e.target.result;
+				
+				var lines = file.split(/#/);
+				
+				// experiment
+				var experiment = lines[0].trim();
+				var condition = lines[1].trim();
+				
+				$("#condition").html( "Experiment " + experiment + "; Condition " + condition );
+				
+				
+				$("#txtPriorities").val( lines[2].trim() );
+				$("#txtPriorities2").val( lines[3].trim() );
+				$("#txtDestinations").val( lines[4].trim() );
+				$("#txtDestinations2").val( lines[5].trim() );
+				$("#txtTrucks").val( lines[6].trim() );
+				$("#txtTrucks2").val( lines[7].trim() );
+				$("#txtRoutes").val( lines[8].trim() );
+				$("#txtRoutes2").val( lines[9].trim() );
+				
+				$("#txtFood").val( lines[10].trim() );
+				$("#txtWater").val( lines[11].trim() );
+				$("#txtMedical").val( lines[12].trim() );
+				$("#txtConstruction").val( lines[13].trim() );
+			};
+			
+			reader.onerror = (e) => alert(e.target.error.name);
+			
+			reader.readAsText(file);
+		});
+		
+		
+		function processFile() {
+			
+			
+		}
+	</script>
+  
+  </body>
+</html>
