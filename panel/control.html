@@ -170,6 +170,7 @@
 				<button onclick="select()" class="btn btn-warning btn-lg">Select All</button>
 				<button onclick="deselect()" class="btn btn-warning btn-lg">Deselect All</button>
 				<button onclick="surplus()" class="btn btn-primary btn-lg">Copy Surplus</button>
+				<button onclick="deficit()" class="btn btn-primary btn-lg">Copy Deficit</button>
 			</div>
 		</div>
     
@@ -420,6 +421,80 @@
 							msg = msg + ", and ";
 							
 					msg = msg + (-1*parseInt(diffs[i])) + " " + label[i];
+					
+					// increment
+					prep++;
+				}
+			}
+			
+			
+			combine( msg + "." );
+			
+		}
+		
+		
+		
+		function deficit() {
+			var counter = [
+				$("#txtFood").val(),
+				$("#txtWater").val(),
+				$("#txtMedical").val(),
+				$("#txtConstruction").val()
+			];
+			
+			var reqs = [
+				$("#txtFood2").val(),
+				$("#txtWater2").val(),
+				$("#txtMedical2").val(),
+				$("#txtConstruction2").val()
+			];
+			
+			var diffs = [
+				0,
+				0,
+				0,
+				0
+			];
+			
+			var label = [
+				"Food",
+				"Water",
+				"Medical Supplies",
+				"Construction Supplies"
+			];
+			
+			var ch = document.getElementsByName("supplies");
+			var n = 0;
+			
+			
+			// compute difference
+			for(var i = 0; i < ch.length; i++) {
+				diffs[i] = parseInt(reqs[i]) - parseInt(counter[i]);
+			}
+			
+			// count
+			for(var i = 0; i < ch.length; i++) {
+				if(diffs[i] > 0)
+					n++;
+			}
+			
+			var msg = "I need";
+			var prep = 0;
+			
+			for(var i = 0; i < ch.length; i++) {
+				if(diffs[i] > 0) {
+					if(prep != n-1)
+						if(prep == 0)
+							msg = msg + " ";
+						else
+							msg = msg + ", ";
+					else
+						if(prep == 0)
+							msg = msg + " ";
+						else
+							msg = msg + ", and ";
+							
+					msg = msg + parseInt(diffs[i]) + " " + label[i];
 					
 					// increment
 					prep++;
