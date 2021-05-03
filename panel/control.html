@@ -77,6 +77,7 @@
 			<div class="col-8">
 				<button onclick="logged()" class="btn btn-primary btn-lg">Logged In</button>
 				<button onclick="got()" class="btn btn-primary btn-lg">Got It</button>
+				<button onclick="got_document()" class="btn btn-primary btn-lg">Got Document</button>
 				<button onclick="none()" class="btn btn-primary btn-lg">None</button>
 				<button onclick="no()" class="btn btn-primary btn-lg">No</button>
 				<button onclick="yes()" class="btn btn-primary btn-lg">Yes</button>
@@ -84,6 +85,7 @@
 				<button onclick="wait()" class="btn btn-primary btn-lg">Please Wait</button>
 				<button onclick="done()" class="btn btn-primary btn-lg">Done</button>
 				<button onclick="mistake()" class="btn btn-primary btn-lg">Mistake</button>
+				<button onclick="got_update()" class="btn btn-primary btn-lg">See Update?</button>
 				
 				<br /><br />
 				
@@ -94,56 +96,72 @@
 			
 			<div class="col-4">
 				<div class="form-row">
-					<div class="col-auto">
+					<div class="col-4">
 						<input type="text" class="form-control" id="txtFood" value="">
 					</div>
 					
-					<div class="col-auto">
+					<div class="col-4">
 						<div class="form-check">
 							<input class="form-check-input" type="checkbox" checked="true" id="chkFood" name="supplies">
 							<label class="form-check-label" for="chkFood">Food</label>
 						</div>
 					</div>
+					
+					<div class="col-4">
+						<input type="text" class="form-control" id="txtFood2" value="">
+					</div>
 				</div>
 				
 				<div class="form-row">
-					<div class="col-auto">
+					<div class="col-4">
 						<input type="text" class="form-control" id="txtWater" value="">
 					</div>
 					
-					<div class="col-auto">
+					<div class="col-4">
 						<div class="form-check">
 							<input class="form-check-input" type="checkbox" checked="true" id="chkWater" name="supplies">
 							<label class="form-check-label" for="chkWater">Water</label>
 						</div>
 					</div>
+					
+					<div class="col-4">
+						<input type="text" class="form-control" id="txtWater2" value="">
+					</div>
 				</div>
 				
 				
 				<div class="form-row">
-					<div class="col-auto">
+					<div class="col-4">
 						<input type="text" class="form-control" id="txtMedical" value="">
 					</div>
 					
-					<div class="col-auto">
+					<div class="col-4">
 						<div class="form-check">
 							<input class="form-check-input" type="checkbox" checked="true" id="chkMedical" name="supplies">
 							<label class="form-check-label" for="chkMedical">Medical Supplies</label>
 						</div>
 					</div>
+					
+					<div class="col-4">
+						<input type="text" class="form-control" id="txtMedical2" value="">
+					</div>
 				</div>
 				
 				
 				<div class="form-row">
-					<div class="col-auto">
+					<div class="col-4">
 						<input type="text" class="form-control" id="txtConstruction" value="">
 					</div>
 					
-					<div class="col-auto">
+					<div class="col-4">
 						<div class="form-check">
 							<input class="form-check-input" type="checkbox" checked="true" id="chkConstruction" name="supplies">
 							<label class="form-check-label" for="chkConstruction">Construction Supplies</label>
 						</div>
+					</div>
+					
+					<div class="col-4">
+						<input type="text" class="form-control" id="txtConstruction2" value="">
 					</div>
 				</div>
 				
@@ -151,6 +169,7 @@
 				<button onclick="inventory()" class="btn btn-primary btn-lg">Copy Supplies</button>
 				<button onclick="select()" class="btn btn-warning btn-lg">Select All</button>
 				<button onclick="deselect()" class="btn btn-warning btn-lg">Deselect All</button>
+				<button onclick="surplus()" class="btn btn-primary btn-lg">Copy Surplus</button>
 			</div>
 		</div>
     
@@ -253,6 +272,14 @@
 			combine( "Sorry. I made a mistake." );
 		}
 		
+		function got_update() {
+			combine( "Can you see the update?" );
+		}
+		
+		function got_document() {
+			combine( "I have the document." );
+		}
+		
 		function custom() {
 			combine( $("#custom").val() );
 		}
@@ -329,6 +356,83 @@
 				ch[i].checked = false;
 			}
 		}
+		
+		
+		
+		function surplus() {
+			var counter = [
+				$("#txtFood").val(),
+				$("#txtWater").val(),
+				$("#txtMedical").val(),
+				$("#txtConstruction").val()
+			];
+			
+			var reqs = [
+				$("#txtFood2").val(),
+				$("#txtWater2").val(),
+				$("#txtMedical2").val(),
+				$("#txtConstruction2").val()
+			];
+			
+			var diffs = [
+				0,
+				0,
+				0,
+				0
+			];
+			
+			var label = [
+				"Food",
+				"Water",
+				"Medical Supplies",
+				"Construction Supplies"
+			];
+			
+			var ch = document.getElementsByName("supplies");
+			var n = 0;
+			
+			
+			// compute difference
+			for(var i = 0; i < ch.length; i++) {
+				diffs[i] = parseInt(reqs[i]) - parseInt(counter[i]);
+			}
+			
+			// count
+			for(var i = 0; i < ch.length; i++) {
+				if(diffs[i] < 0)
+					n++;
+			}
+			
+			var msg = "I have a surplus of";
+			var prep = 0;
+			
+			for(var i = 0; i < ch.length; i++) {
+				if(diffs[i] < 0) {
+					if(prep != n-1)
+						if(prep == 0)
+							msg = msg + " ";
+						else
+							msg = msg + ", ";
+					else
+						if(prep == 0)
+							msg = msg + " ";
+						else
+							msg = msg + ", and ";
+							
+					msg = msg + (-1*parseInt(diffs[i])) + " " + label[i];
+					
+					// increment
+					prep++;
+				}
+			}
+			
+			
+			combine( msg + "." );
+			
+		}
+		
+		
+		
 		
 		
 		var txtFile = document.getElementById('source');
