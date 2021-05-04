@@ -1,6 +1,6 @@
 1
 #
-2
+1
 #
 I have priority update information. 
 The primary source of medical help is provided by hospitals. 
@@ -14,18 +14,18 @@ I want to go to the bridge because out of all of my supplies I have the most con
 I have 40 Food, 25 Water, 5 Medical Supplies, and 60 Construction supplies.
 #
 Hospital needs 50 units of cleaning supplies.
-The bridge requires 5 tons of gravel.
+The bridge requires 5 tons of gravel. 
 #
 I have capacity information that says Truck 1 can carry 90 units, Truck 2 can carry 130 units, Truck 3 can carry 100 units and Truck 4 can carry 105 units.
 #
-Truck 1 can transport 2 people.
-Truck 3 has refrigeration capability.
+Truck 1 can transport 2 people. 
+Truck 3 has refrigeration capability. 
 Truck 2 and 3 need maintenance check after 2000 miles.
 #
 I think we should go with Route 3 because it is the shortest distance.
 #
 Due to landslides, travel time for Route 3 has increased by 200 minutes.
-Severe Storm Warning: Nandor Highway 12 Satula to Armas.
+Severe Storm Warning: Nandor Highway 12 Satula to Armas,
 Accident on Nandor Highway 12, expect a 2 hour delay.
 #
 40

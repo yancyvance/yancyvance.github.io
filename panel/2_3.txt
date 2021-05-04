@@ -1,0 +1,40 @@
+2
+#
+2
+#
+I have priority update information.  
+The distribution center is asking for water donations. 
+The shelter is rapidly running out of water and food supplies due to the increase of those in need.
+City of Pulma now relies heavily on the distribution center for their water needs.
+According to my mission debrief document, the distribution center is supporting the shelter. So I think the distribution center should be a higher priority than the shelter to better support it.  Next, we should decide which destination should be the first.
+#
+Hospital is getting additional support from the Army and does not require immediate attention. 
+Damaged hospital wing has been repaired.
+Shelter's intake center is located in the parking lot.
+#
+I have almost the same amount of Food, Water and Medical Supplies so I want to go to the Hospital.
+I have 25 Food, 25 Water, 30 Medical Supplies, and 10 Construction supplies. 
+#
+There may not be enough supplies to meet the requirements of all the destinations.
+The Shelter needs 100 blankets.
+The Shelter needs 1000 rolls of toilet paper.
+#
+I have capacity information that says Truck 1 can carry 85 units, Truck 2 can carry 120 units, Truck 3 can carry 125 units and Truck 4 can carry 115 units.
+#
+Truck 1 cannot transport more than 1000 gallons of fuel.
+Truck 5 has a capacity of 125. 
+Truck 2 will carry 10 units of industrial equipment thus only 110 will be available to use.
+#
+I think we should go with Route 4 because the bridge got repaired last time.
+#
+The road between Silta and Pulma has been destroyed due to aftershocks and is untraversable and therefore, the bridge between Silta and Pulma is inaccessible.
+Nandor Highway 12 between Satula to Loe is clear for travel. 
+Alert: Doctors Without Borders are on route to Kapea.
+#
+25
+#
+25
+#
+30
+#
+10
