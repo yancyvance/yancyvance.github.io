@@ -91,6 +91,7 @@
 				
 				<textarea id="custom" class="form-control" rows="2"></textarea>
 				<button onclick="custom()" class="btn btn-primary btn-lg btn-block">Copy Custom</button>
+				<button onclick="clear_custom()" class="btn btn-warning btn-lg btn-block">Clear Custom</button>
 				
 			</div>
 			
@@ -283,6 +284,11 @@
 		
 		function custom() {
 			combine( $("#custom").val() );
+		}
+		
+		function clear_custom() {
+			$("#custom").val("");
+			$("#custom").focus();
 		}
 		
 		
