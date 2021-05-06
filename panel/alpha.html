@@ -219,6 +219,12 @@
 			copy();
 		}
 		
+		function complete(msg) {
+			$("#txtData").val(  msg );
+			
+			copy();
+		}
+		
 		
 		function priorities() {
 			combine( $("#txtPriorities").val() );
@@ -282,7 +288,8 @@
 		}
 		
 		function wait() {
-			combine( "Please wait." );
+			//combine( "Please wait." );
+			complete( "Alpha is processing. Please standby." );
 		}
 		
 		function done() {
