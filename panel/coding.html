@@ -1,0 +1,153 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <!-- Required meta tags -->
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+
+    <!-- Bootstrap CSS -->
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
+
+    <title>Coding</title>
+  </head>
+  <body>
+	  <div class="container">
+		<div class="row">
+			<div class="col-12" id="chronoExample">
+				<input class="form-control form-control-lg values" type="text" value="00:00:00" />
+				<div>
+					<button class="startButton btn btn-success">Start</button>
+					<button class="stopButton btn btn-danger">Stop</button>
+					<button class="resetButton btn btn-secondary">Reset</button>
+				</div>
+			</div>
+		</div>
+		  
+		<br />
+		  
+	    <div class="row">
+			<div class="col-12">
+				<textarea id="logs" class="form-control" rows="7"></textarea>
+			</div>
+		</div>
+		  
+		  <br />
+		  
+		  <div class="row">
+			<div class="col-4">			
+				<button class="btn btn-primary btn-lg btn-block" onclick="report(1)">Passing Info</button><div id="ct1"></div>
+				<button class="btn btn-primary btn-lg btn-block" onclick="report(2)">Asking Info</button><div id="ct2"></div>
+				<button class="btn btn-primary btn-lg btn-block" onclick="report(3)">Suggesting/Negotiating</button><div id="ct3"></div>
+				<button class="btn btn-primary btn-lg btn-block" onclick="report(4)">Team Consensus</button><div id="ct4"></div>
+				<button class="btn btn-primary btn-lg btn-block" onclick="report(5)">Anchoring Bias</button><div id="ct5"></div>
+				<button class="btn btn-primary btn-lg btn-block" onclick="report(6)">Information Pooling Bias</button><div id="ct6"></div>
+				<button class="btn btn-primary btn-lg btn-block" onclick="report(7)">Group Think</button><div id="ct7"></div>
+			</div>
+			
+			<div class="col-4">	
+				<button class="btn btn-primary btn-lg btn-block" onclick="report(8)">Question Facilitator</button><div id="ct8"></div>
+						<button class="btn btn-primary btn-lg btn-block" onclick="report(9)">Facilitator Probe (Question)</button><div id="ct9"></div>
+						<button class="btn btn-primary btn-lg btn-block" onclick="report(10)">Suggestion to Improving Taskwork</button><div id="ct10"></div>
+						<button class="btn btn-primary btn-lg btn-block" onclick="report(11)">Suggestion to Improving Teamwork</button><div id="ct11"></div>
+						<button class="btn btn-primary btn-lg btn-block" onclick="report(12)">Response to Facilitator Feedback</button><div id="ct12"></div>
+				</div>
+
+				<div class="col-4">	
+					<button class="btn btn-primary btn-lg btn-block" onclick="report(13)">Asked for Information</button><div id="ct13"></div>
+					<button class="btn btn-primary btn-lg btn-block" onclick="report(14)">Agent is Requesting</button><div id="ct14"></div>
+					<button class="btn btn-primary btn-lg btn-block" onclick="report(15)">Shares Unique Info</button><div id="ct15"></div>
+					<button class="btn btn-primary btn-lg btn-block" onclick="report(16)">Anchoring Bias</button><div id="ct16"></div>
+					<button class="btn btn-primary btn-lg btn-block" onclick="report(17)">Information Pooling Bias</button><div id="ct17"></div>
+					<button class="btn btn-primary btn-lg btn-block" onclick="report(18)">Group Think</button><div id="ct18"></div>
+				</div>
+			</div>
+
+	  
+	</div>
+    
+
+
+    <!-- Optional JavaScript -->
+    <!-- jQuery first, then Popper.js, then Bootstrap JS -->
+    <script src="https://code.jquery.com/jquery-3.2.1.slim.min.js" integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN" crossorigin="anonymous"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js" integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q" crossorigin="anonymous"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js" integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl" crossorigin="anonymous"></script>
+
+<script src="https://cdn.jsdelivr.net/npm/easytimer@1.1.3/dist/easytimer.min.js"></script>
+<script>
+	function report(id) {
+		console.log(id + " " + timer.getTimeValues().toString());
+		$('#logs').val( timer.getTimeValues().toString() + " " + id + "\n" + $('#logs').val() );
+		
+		// off by one
+		h = parseInt(id) - 1;
+		
+		counts[h] = counts[h] + 1;
+		
+		$('#ct' + id).html( counts[h] );
+	}
+</script>
+<script>
+
+var timer = new Timer();
+$('#chronoExample .startButton').click(function () {
+	// get values
+    var vals = timer.getTimeValues();
+    
+    var hms = $('#chronoExample .values').val();   // your input string
+	var a = hms.split(':'); // split it at the colons
+
+	// minutes are worth 60 seconds. Hours are worth 60 minutes.
+	var seconds2 = (+a[0]) * 60 * 60 + (+a[1]) * 60 + (+a[2]); 
+
+	console.log(seconds2);
+	
+	timer = new Timer();
+	
+	timer.addEventListener('secondsUpdated', function (e) {
+		$('#chronoExample .values').val(timer.getTimeValues().toString());
+	});
+
+	timer.addEventListener('started', function (e) {
+		$('#chronoExample .values').val(timer.getTimeValues().toString());
+	});
+
+	timer.addEventListener('reset', function (e) {
+		$('#chronoExample .values').val(timer.getTimeValues().toString());
+	});
+
+
+    timer.start({startValues: {seconds: seconds2}});
+});
+
+
+$('#chronoExample .stopButton').click(function () {
+    timer.stop();
+});
+
+
+
+$('#chronoExample .resetButton').click(function () {
+    $('#chronoExample .values').val( "00:00:00" );
+});
+
+	var counts = [];
+	for(i = 0; i < 18; i++) {
+	     counts[i] = 0;
+	     
+	    $('#ct' + (i+1)).html( counts[i] );
+	    
+	}
+	     
+function process() {
+	
+	
+	
+}
+
+
+</script>
+
+  </body>
+</html>
+
