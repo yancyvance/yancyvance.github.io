@@ -129,6 +129,16 @@ $('#chronoExample .stopButton').click(function () {
 
 $('#chronoExample .resetButton').click(function () {
     $('#chronoExample .values').val( "00:00:00" );
+    
+    counts = [];
+	for(i = 0; i < 18; i++) {
+	     counts[i] = 0;
+	     
+	    $('#ct' + (i+1)).html( counts[i] );
+	    
+	}
+	
+	$('#logs').val("");
 });
 
 	var counts = [];
