@@ -10,7 +10,6 @@
     table {
       border-collapse: collapse;
       width: 100%;
-      margin-top: 1em;
     }
     th, td {
       border: 1px solid #888;
@@ -23,6 +22,9 @@
     .course-table {
       font-size: 0.95em;
     }
+    .main-table {
+      margin-top: 1em;
+    }
   </style>
 </head>
 <body>
@@ -33,13 +35,16 @@
   <input type="file" id="jsonFile" accept=".json">
   <button onclick="loadFromFile()">Load Table</button>
 
-  <table id="student-table" style="display: none;">
+  <table id="student-table" class="main-table" style="display: none;">
     <thead>
       <tr>
         <th>ID</th>
         <th>Name</th>
         <th>Status</th>
         <th>Extra Info</th>
+        <th>Tuition Due</th>
+        <th>Credit Hours</th>
+        <th>Enrolled Courses Count</th>
         <th>Enrolled Courses</th>
       </tr>
     </thead>
@@ -90,7 +95,7 @@
         const statusCell = document.createElement('td');
         statusCell.textContent = student.status;
         row.appendChild(statusCell);
-
+        
         // Extra Info
         const extraCell = document.createElement('td');
         if (student.status === "Graduate") {
@@ -102,9 +107,26 @@
         }
         row.appendChild(extraCell);
 
+        // Tuition Due
+        const tuitionCell = document.createElement('td');
+        tuitionCell.textContent = student.tuitionDue || "N/A";
+        row.appendChild(tuitionCell);
+        
+        
+        // Enrolled Courses Count
+        const creditCell = document.createElement('td');
+        creditCell.textContent = student.creditHours ?? "0";
+        row.appendChild(creditCell);
+
+        // Enrolled Courses Count
+        const countCell = document.createElement('td');
+        countCell.textContent = student.enrolledCoursesCount ?? "0";
+        row.appendChild(countCell);
+
+
+
         // Enrolled Courses
         const coursesCell = document.createElement('td');
-
         if (Array.isArray(student.enrolledCourses) && student.enrolledCourses.length > 0) {
           const courseTable = document.createElement('table');
           courseTable.className = 'course-table';
