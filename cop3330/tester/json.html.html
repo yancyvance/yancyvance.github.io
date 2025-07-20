@@ -1,0 +1,144 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Student JSON File Viewer</title>
+  <style>
+    body {
+      font-family: Arial, sans-serif;
+    }
+    table {
+      border-collapse: collapse;
+      width: 100%;
+      margin-top: 1em;
+    }
+    th, td {
+      border: 1px solid #888;
+      padding: 8px;
+      text-align: left;
+    }
+    th {
+      background-color: #f2f2f2;
+    }
+    .course-table {
+      font-size: 0.95em;
+    }
+  </style>
+</head>
+<body>
+
+  <h1>Student Information from JSON File</h1>
+
+  <label for="jsonFile"><strong>Select a JSON file:</strong></label>
+  <input type="file" id="jsonFile" accept=".json">
+  <button onclick="loadFromFile()">Load Table</button>
+
+  <table id="student-table" style="display: none;">
+    <thead>
+      <tr>
+        <th>ID</th>
+        <th>Name</th>
+        <th>Status</th>
+        <th>Extra Info</th>
+        <th>Enrolled Courses</th>
+      </tr>
+    </thead>
+    <tbody></tbody>
+  </table>
+
+  <script>
+    function loadFromFile() {
+      const input = document.getElementById('jsonFile');
+      const file = input.files[0];
+
+      if (!file) {
+        alert("Please select a file first.");
+        return;
+      }
+
+      const reader = new FileReader();
+      reader.onload = function (event) {
+        try {
+          const jsonData = JSON.parse(event.target.result);
+          displayTable(jsonData);
+        } catch (err) {
+          alert("Invalid JSON:\n" + err.message);
+        }
+      };
+      reader.readAsText(file);
+    }
+
+    function displayTable(data) {
+      const table = document.getElementById('student-table');
+      const tbody = table.querySelector('tbody');
+      tbody.innerHTML = ""; // Clear previous results
+
+      data.forEach(student => {
+        const row = document.createElement('tr');
+
+        // ID
+        const idCell = document.createElement('td');
+        idCell.textContent = student.id;
+        row.appendChild(idCell);
+
+        // Name
+        const nameCell = document.createElement('td');
+        nameCell.textContent = student.name;
+        row.appendChild(nameCell);
+
+        // Status
+        const statusCell = document.createElement('td');
+        statusCell.textContent = student.status;
+        row.appendChild(statusCell);
+
+        // Extra Info
+        const extraCell = document.createElement('td');
+        if (student.status === "Graduate") {
+          extraCell.textContent = "Thesis: " + (student.thesisTopic || "N/A");
+        } else if (student.status === "Undergraduate") {
+          extraCell.textContent = "Year: " + (student.yearLevel || "N/A");
+        } else {
+          extraCell.textContent = "N/A";
+        }
+        row.appendChild(extraCell);
+
+        // Enrolled Courses
+        const coursesCell = document.createElement('td');
+
+        if (Array.isArray(student.enrolledCourses) && student.enrolledCourses.length > 0) {
+          const courseTable = document.createElement('table');
+          courseTable.className = 'course-table';
+
+          student.enrolledCourses.forEach(course => {
+            const courseRow = document.createElement('tr');
+
+            const codeCell = document.createElement('td');
+            codeCell.textContent = course.code;
+            courseRow.appendChild(codeCell);
+
+            const titleCell = document.createElement('td');
+            titleCell.textContent = course.title;
+            courseRow.appendChild(titleCell);
+
+            const creditCell = document.createElement('td');
+            creditCell.textContent = course.creditHours;
+            courseRow.appendChild(creditCell);
+
+            courseTable.appendChild(courseRow);
+          });
+
+          coursesCell.appendChild(courseTable);
+        } else {
+          coursesCell.textContent = "No enrolled courses";
+        }
+
+        row.appendChild(coursesCell);
+        tbody.appendChild(row);
+      });
+
+      table.style.display = "table";
+    }
+  </script>
+
+</body>
+</html>
